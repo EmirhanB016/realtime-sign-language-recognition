@@ -3,11 +3,9 @@ import mediapipe as mp
 import csv
 import os
 
-# Ayarlar
-isaret_adi = "merhaba"  # Kaydedilecek hareketin etiketi
+isaret_adi = "U"
 dosya_yolu = "data/hareketler.csv"
 
-# Klasör yoksa oluştur
 if not os.path.exists("data"):
     os.makedirs("data")
 
@@ -30,13 +28,11 @@ with mp_eller.Hands(min_detection_confidence=0.7, min_tracking_confidence=0.7) a
             for el_isaretleri in sonuclar.multi_hand_landmarks:
                 mp_cizim.draw_landmarks(frame, el_isaretleri, mp_eller.HAND_CONNECTIONS)
                 
-                # 's' tuşuna basıldığında koordinatları kaydet
-                if cv2.waitKey(1) & 0xFF == ord('s'):
+                if cv2.waitKey(1) & 0xFF == ord('p'):
                     veri_satiri = [isaret_adi]
                     for lm in el_isaretleri.landmark:
                         veri_satiri.extend([lm.x, lm.y, lm.z])
                     
-                    # CSV dosyasına ekle
                     with open(dosya_yolu, mode='a', newline='') as f:
                         yazici = csv.writer(f)
                         yazici.writerow(veri_satiri)

@@ -20,15 +20,12 @@ with mp_eller.Hands(min_detection_confidence=0.5, min_tracking_confidence=0.5) a
         
         if sonuclar.multi_hand_landmarks:
             for el_isaretleri in sonuclar.multi_hand_landmarks:
-                # 1. İskeleti ekrana çiz
                 mp_cizim.draw_landmarks(frame, el_isaretleri, mp_eller.HAND_CONNECTIONS)
                 
-                # 2. VERİ ÇEKİMİ: Sadece Bilek noktasının (0. Landmark) koordinatlarını al
                 bilek_x = el_isaretleri.landmark[mp_eller.HandLandmark.WRIST].x
                 bilek_y = el_isaretleri.landmark[mp_eller.HandLandmark.WRIST].y
                 bilek_z = el_isaretleri.landmark[mp_eller.HandLandmark.WRIST].z
                 
-                # Terminale yazdır (Virgülden sonra 2 basamak olacak şekilde)
                 print(f"Bilek -> X: {bilek_x:.2f} | Y: {bilek_y:.2f} | Z: {bilek_z:.2f}")
                 
         cv2.imshow("MediaPipe Iskelet Testi", frame)
