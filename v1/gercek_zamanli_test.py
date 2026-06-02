@@ -3,7 +3,7 @@ import numpy as np
 from tensorflow.keras.models import load_model
 
 print("1. Yapay Zeka Beyni (Model) Yükleniyor...")
-model = load_model('asl_model.h5')
+model = load_model('v1/asl_model.h5')
 
 def harf_bul(etiket):
     if etiket >= 9:
